@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2048</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="nowe2048.css" />
+    <script src="2048.js"></script>
+  </head>
+  <body onload="setGame()" class="text-center">
+    <main class="flex flex-col">
+      <h1 class="text-center font-bold text-4xl m-5">2048</h1>
+      <hr class="w-[500px] m-auto border-2" />
+      <h2 class="text-center m-5 font-bold flex flex-col">
+        <p>Score : <span id="score">0</span></p>
+        <p>Highscore : <span id="high-score">0</span></p>
+      </h2>
+      <div
+        id="board"
+        class="flex flex-wrap w-[400px] h-[400px] bg-white border-y-[6px] border-solid border-[#bbada0] mx-auto my-auto justify-center"
+      >
+        <!-- <div class="tile x2">2</div> -->
+      </div>
+      <button
+        onclick="resetGame()"
+        class="mt-20 px-5 font-semibold border-[#bbada0] text-[#727371] m-auto border-4 w-auto bg-[#eee4da] align-middle"
+      >
+        Reset
+      </button>
+    </main>
+  </body>
+</html>
+
+<!-- dodaj sie do gita -->
