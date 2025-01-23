@@ -1,0 +1,98 @@
+#board {
+    width: 400px;
+    height: 400px;
+    background-color: #bbada0;
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.tile {
+    width: 95px;
+    height: 95px;
+    background-color: #eee4da;
+    border:6px solid #bbada0;
+
+    font-size: 40px;
+
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x2 {
+    background-color: #eee4da;
+    color: #727371;
+}
+  
+.x4 {
+    background-color: #ece0ca;
+    color: #727371;
+}
+  
+.x8 {
+    background-color: #f4b17a;
+    color: white;
+}
+  
+.x16 {
+    background-color: #f59575;
+    color: white;
+}
+  
+.x32 {
+    background-color: #f57c5f;
+    color: white;
+}
+  
+.x64 {
+    background-color: #f65d3b;
+    color: white;
+}
+  
+.x128 {
+    background-color: #edce71;
+    color: white;
+}
+  
+.x256 {
+    background-color: #edcc63;
+    color: white;
+}
+  
+.x512 {
+    background-color: #edc651;
+    color: white;
+}
+  
+.x1024 {
+    background-color: #eec744;
+    color: white;
+    font-size: 30px;
+}
+  
+.x2048 {
+    background-color: #ecc230;
+    color: white;
+    font-size: 30px;
+}
+  
+.x4096 {
+    background-color: #fe3d3d;
+    color: white;
+    font-size: 30px;
+}
+  
+.x8192 {
+    background-color: #ff2020;
+    color: white;
+    font-size: 30px;
+}
+
+/* dodaj sie do gita */
