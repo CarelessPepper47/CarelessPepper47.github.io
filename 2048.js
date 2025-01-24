@@ -1,5 +1,10 @@
 // nic zmiany byleby dodać do gita
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Twój kod inicjalizujący
+    console.log("DOM załadowany!");
+});
+
 let board;
 
 let score = 0;
