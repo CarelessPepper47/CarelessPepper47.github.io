@@ -9,10 +9,23 @@ document.addEventListener("touchmove", (e) => {
     e.preventDefault();
 }, { passive: false }); 
 
+// document.addEventListener("DOMContentLoaded", () => {
+//     const savedHighScore = localStorage.getItem("hscore");
+//     if (savedHighScore) {
+//         highScore = parseInt(savedHighScore, 10);
+//         document.getElementById("highscore").innerText = highScore;
+//     }
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
-    const savedHighScore = localStorage.getItem("hscore");
+    const savedHighScore = localStorage.getItem("hScore");
     if (savedHighScore) {
         highScore = parseInt(savedHighScore, 10);
+        console.log("Zapis wyniku:", highScore);
+        document.getElementById("highscore").innerText = highScore;
+    } else {
+        console.log("Nie ma - 0");
+        highScore = 0;
         document.getElementById("highscore").innerText = highScore;
     }
 });
@@ -312,9 +325,52 @@ function restartGame() {
 
     score = 0;
     document.getElementById("score").innerText = score;
-    console.log(localStorage.getItem("hscore"));
 
     resetBoard();
+}
+
+
+
+
+
+////////////////////////////////////////// CIASTECZKA
+
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let c = cookies[i].trim();
+        if (c.indexOf(nameEQ) === 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedHighScore = getCookie("highScore");
+    if (savedHighScore) {
+        highScore = parseInt(savedHighScore, 10);
+        document.getElementById("highscore").innerText = highScore;
+    } else {
+        console.log("No Highscore found in cookies, initializing to 0.");
+        highScore = 0;
+        document.getElementById("highscore").innerText = highScore;
+    }
+});
+
+if (score > highScore) {
+    highScore = score;
+    setCookie("highScore", highScore, 365); // Przechowywanie na 1 rok
+    console.log("New Highscore saved to cookies:", highScore);
+    document.getElementById("highscore").innerText = highScore;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
