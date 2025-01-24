@@ -284,54 +284,54 @@ function updateTile(tile, num) {
      }};
 
 
-// document.addEventListener("DOMContentLoaded"), () => {
-//     let touchStartX = 0;
-//     let touchStartY = 0;
-//     let touchEndX = 0;
-//     let touchEndY = 0;
+board.addEventListener("DOMContentLoaded"), () => {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
 
-//     const swipeTreshold = 50;
+    const swipeTreshold = 50;
 
-//     const handleSwipe = () => {
-//         const diffX = touchEndX - touchStartX;
-//         const diffY = touchEndY - touchStartY;
+    const handleSwipe = () => {
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
 
-//         if (Math.abs(diffX) > Math.abs(diffY)) {
-//             if (diffX > 0) {
-//                 triggerKey("ArrowRight");
-//             } else {
-//                 triggerKey("ArrowLeft");
-//             }
-//         } else {
-//             if (Math.abs(diffY) > swipeTreshold) {
-//                 if (diffY > 0) {
-//                     triggerKey("ArrowDown");
-//                 } else {
-//                     triggerKey("ArrowUp");
-//                 }
-//             }
-//         }
-//     }
-// }
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+                triggerKey("ArrowRight");
+            } else {
+                triggerKey("ArrowLeft");
+            }
+        } else {
+            if (Math.abs(diffY) > swipeTreshold) {
+                if (diffY > 0) {
+                    triggerKey("ArrowDown");
+                } else {
+                    triggerKey("ArrowUp");
+                }
+            }
+        }
+    }
+}
 
-// const triggerKey = (key) => {
-//     const event = new KeyboardEvent("keydown", { key });
-//     document.dispatchEvent(event);
-// }
+const triggerKey = (key) => {
+    const event = new KeyboardEvent("keydown", { key });
+    document.dispatchEvent(event);
+}
 
-// document.addEventListener("touchstart", (e) => {
-//     touchStartX = e.touches[0].clientX;
-//     touchStartY = e.touches[0].clientY
-// });
+document.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY
+});
 
-// document.addEventListener("touchmove", (e) => {
-//     touchEndX = e.touches[0].clientX;
-//     touchEndY = e.touches[0].clientY
-// });
+document.addEventListener("touchmove", (e) => {
+    touchEndX = e.touches[0].clientX;
+    touchEndY = e.touches[0].clientY
+});
 
-// document.addEventListener("touchend", () => {
-//     handleSwipe();
-// })
+document.addEventListener("touchend", () => {
+    handleSwipe();
+})
 
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
