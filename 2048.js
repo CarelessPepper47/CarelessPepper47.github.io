@@ -96,7 +96,8 @@ function updateScoreDisplay() {
 function updateHighScore() {
     if (score > highScore) {
         highScore = score;
-        localStorage.setItem('hscore', highScore); // Store high score in local storage
+        // localStorage.setItem('hscore', highScore); // Store high score in local storage
+        setCookie("hScore", highScore, 365);
         document.getElementById("highscore").innerText = "High Score: " + highScore;
     }
 }
@@ -296,8 +297,9 @@ function updateTile(tile, num) {
              dwaStart();
          }
 
-         document.getElementById("score").innerText = score;
-     }};
+     }
+     document.getElementById("score").innerText = score;
+    };
 
 const triggerKey = (key) => {
     const event = new KeyboardEvent("keydown", { key });
@@ -316,9 +318,12 @@ document.addEventListener("touchmove", (e) => {
 
 
 function restartGame() {
+    console.log("Restart")
     if (score > highScore) {
+        console.log("Score > hS => hS = Score")
         highScore = score;
-        localStorage.setItem("hscore", highScore);
+        // localStorage.setItem("hscore", highScore);
+        setCookie("hScore", highScore, 365);
         document.getElementById("highscore").innerText = highScore;
         console.log("Highscore updated:", highScore);
     }
@@ -326,7 +331,7 @@ function restartGame() {
     score = 0;
     document.getElementById("score").innerText = score;
 
-    resetBoard();
+    resetGame();
 }
 
 
@@ -355,7 +360,7 @@ function getCookie(name) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const savedHighScore = getCookie("highScore");
+    const savedHighScore = getCookie("hScore");
     if (savedHighScore) {
         highScore = parseInt(savedHighScore, 10);
         document.getElementById("highscore").innerText = highScore;
@@ -368,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if (score > highScore) {
     highScore = score;
-    setCookie("highScore", highScore, 365); // Przechowywanie na 1 rok
+    setCookie("hScore", highScore, 365); // Przechowywanie na 1 rok
     console.log("New Highscore saved to cookies:", highScore);
     document.getElementById("highscore").innerText = highScore;
 }
