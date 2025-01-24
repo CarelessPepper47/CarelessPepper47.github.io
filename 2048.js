@@ -237,54 +237,101 @@ function updateTile(tile, num) {
     }
  }
 
-document.addEventListener("DOMContentLoaded"), () => {
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
+ let touchStartX = 0;
+ let touchStartY = 0;
+ let touchEndX = 0;
+ let touchEndY = 0;
+ 
+ // Obsługa początkowego dotknięcia
+ document.addEventListener("touchstart", (e) => {
+     touchStartX = e.touches[0].clientX;
+     touchStartY = e.touches[0].clientY;
+ });
+ 
+ // Obsługa zakończenia dotknięcia
+ document.addEventListener("touchend", (e) => {
+     touchEndX = e.changedTouches[0].clientX;
+     touchEndY = e.changedTouches[0].clientY;
+     handleSwipeGesture();
+ });
+ 
+ // Funkcja obsługująca gesty przesunięcia
+ function handleSwipeGesture() {
+     const deltaX = touchEndX - touchStartX;
+     const deltaY = touchEndY - touchStartY;
+ 
+     // Sprawdzenie, czy przesunięcie jest bardziej w poziomie czy w pionie
+     if (Math.abs(deltaX) > Math.abs(deltaY)) {
+         if (deltaX > 50) {
+             // Przesunięcie w prawo
+             slideRight();
+             dwaStart();
+         } else if (deltaX < -50) {
+             // Przesunięcie w lewo
+             slideLeft();
+             dwaStart();
+         }
+     } else {
+         if (deltaY > 50) {
+             // Przesunięcie w dół
+             slideDown();
+             dwaStart();
+         } else if (deltaY < -50) {
+             // Przesunięcie w górę
+             slideUp();
+             dwaStart();
+         }
+     }};
 
-    const swipeTreshold = 50;
 
-    const handleSwipe = () => {
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
+// document.addEventListener("DOMContentLoaded"), () => {
+//     let touchStartX = 0;
+//     let touchStartY = 0;
+//     let touchEndX = 0;
+//     let touchEndY = 0;
 
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            if (diffX > 0) {
-                triggerKey("ArrowRight");
-            } else {
-                triggerKey("ArrowLeft");
-            }
-        } else {
-            if (Math.abs(diffY) > swipeTreshold) {
-                if (diffY > 0) {
-                    triggerKey("ArrowDown");
-                } else {
-                    triggerKey("ArrowUp");
-                }
-            }
-        }
-    }
-}
+//     const swipeTreshold = 50;
 
-const triggerKey = (key) => {
-    const event = new KeyboardEvent("keydown", { key });
-    document.dispatchEvent(event);
-}
+//     const handleSwipe = () => {
+//         const diffX = touchEndX - touchStartX;
+//         const diffY = touchEndY - touchStartY;
 
-document.addEventListener("touchstart", (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY
-});
+//         if (Math.abs(diffX) > Math.abs(diffY)) {
+//             if (diffX > 0) {
+//                 triggerKey("ArrowRight");
+//             } else {
+//                 triggerKey("ArrowLeft");
+//             }
+//         } else {
+//             if (Math.abs(diffY) > swipeTreshold) {
+//                 if (diffY > 0) {
+//                     triggerKey("ArrowDown");
+//                 } else {
+//                     triggerKey("ArrowUp");
+//                 }
+//             }
+//         }
+//     }
+// }
 
-document.addEventListener("touchmove", (e) => {
-    touchEndX = e.touches[0].clientX;
-    touchEndY = e.touches[0].clientY
-});
+// const triggerKey = (key) => {
+//     const event = new KeyboardEvent("keydown", { key });
+//     document.dispatchEvent(event);
+// }
 
-document.addEventListener("touchend", () => {
-    handleSwipe();
-})
+// document.addEventListener("touchstart", (e) => {
+//     touchStartX = e.touches[0].clientX;
+//     touchStartY = e.touches[0].clientY
+// });
+
+// document.addEventListener("touchmove", (e) => {
+//     touchEndX = e.touches[0].clientX;
+//     touchEndY = e.touches[0].clientY
+// });
+
+// document.addEventListener("touchend", () => {
+//     handleSwipe();
+// })
 
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
