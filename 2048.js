@@ -243,13 +243,13 @@ function updateTile(tile, num) {
  let touchEndY = 0;
  
  // Obsługa początkowego dotknięcia
- board.addEventListener("touchstart", (e) => {
+ document.addEventListener("touchstart", (e) => {
      touchStartX = e.touches[0].clientX;
      touchStartY = e.touches[0].clientY;
  });
  
  // Obsługa zakończenia dotknięcia
- board.addEventListener("touchend", (e) => {
+ document.addEventListener("touchend", (e) => {
      touchEndX = e.changedTouches[0].clientX;
      touchEndY = e.changedTouches[0].clientY;
      handleSwipeGesture();
