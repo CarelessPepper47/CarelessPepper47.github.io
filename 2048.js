@@ -1,9 +1,13 @@
 // nic zmiany byleby dodać do gita
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Twój kod inicjalizujący
+
     console.log("DOM załadowany!");
 });
+
+document.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+}, { passive: false }); 
 
 let board;
 
