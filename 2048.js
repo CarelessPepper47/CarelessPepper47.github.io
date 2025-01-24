@@ -9,6 +9,15 @@ document.addEventListener("touchmove", (e) => {
     e.preventDefault();
 }, { passive: false }); 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const savedHighScore = localStorage.getItem("hscore");
+    if (savedHighScore) {
+        highScore = parseInt(savedHighScore, 10);
+        document.getElementById("highscore").innerText = highScore;
+    }
+});
+
+
 let board;
 
 let score = 0;
@@ -16,7 +25,7 @@ let score = 0;
 let rows = 4;
 let columns = 4;
 
-let highScore = localStorage.getItem('highScore') || 0; // Retrieve high score from local storage, default to 0 if not found
+let highScore = localStorage.getItem('hscore'); // Retrieve high score from local storage, default to 0 if not found
 
 
 // window.onload = function() {
@@ -48,18 +57,6 @@ function setGame() {
     dwaStart()
 }
 
-// function resetGame() {
-
-// for (let r = 0; r < rows; r++) {
-//     for (let c = 0; c < columns; c++) {
-//         if (!board[r][c] == 0 ) {
-//             board[r][c] = 0;        
-//             }
-//         }
-//     }
-//     dwaStart()
-//     dwaStart()
-// }
 
 function resetGame() {
     for (let r = 0; r < rows; r++) {
@@ -74,6 +71,7 @@ function resetGame() {
     updateScoreDisplay(); // Update score display
     updateHighScore(); // Check if high score needs to be updated
     document.getElementById("score").innerText = score; // Update score
+    document.getElementById("highscore").innerText = score; // Update score
     dwaStart(); // Add new random tiles
     dwaStart();
 }
@@ -85,8 +83,8 @@ function updateScoreDisplay() {
 function updateHighScore() {
     if (score > highScore) {
         highScore = score;
-        localStorage.setItem('highScore', highScore); // Store high score in local storage
-        document.getElementById("high-score").innerText = "High Score: " + highScore;
+        localStorage.setItem('hscore', highScore); // Store high score in local storage
+        document.getElementById("highscore").innerText = "High Score: " + highScore;
     }
 }
 
@@ -251,25 +249,21 @@ function updateTile(tile, num) {
  let touchEndX = 0;
  let touchEndY = 0;
  
- // Obsługa początkowego dotknięcia
  document.addEventListener("touchstart", (e) => {
      touchStartX = e.touches[0].clientX;
      touchStartY = e.touches[0].clientY;
  });
  
- // Obsługa zakończenia dotknięcia
  document.addEventListener("touchend", (e) => {
      touchEndX = e.changedTouches[0].clientX;
      touchEndY = e.changedTouches[0].clientY;
      handleSwipeGesture();
  });
  
- // Funkcja obsługująca gesty przesunięcia
  function handleSwipeGesture() {
      const deltaX = touchEndX - touchStartX;
      const deltaY = touchEndY - touchStartY;
  
-     // Sprawdzenie, czy przesunięcie jest bardziej w poziomie czy w pionie
      if (Math.abs(deltaX) > Math.abs(deltaY)) {
          if (deltaX > 50) {
              // Przesunięcie w prawo
@@ -282,65 +276,46 @@ function updateTile(tile, num) {
          }
      } else {
          if (deltaY > 50) {
-             // Przesunięcie w dół
              slideDown();
              dwaStart();
          } else if (deltaY < -50) {
-             // Przesunięcie w górę
              slideUp();
              dwaStart();
          }
+
+         document.getElementById("score").innerText = score;
      }};
-
-
-board.addEventListener("DOMContentLoaded"), () => {
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-
-    const swipeTreshold = 50;
-
-    const handleSwipe = () => {
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
-
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            if (diffX > 0) {
-                triggerKey("ArrowRight");
-            } else {
-                triggerKey("ArrowLeft");
-            }
-        } else {
-            if (Math.abs(diffY) > swipeTreshold) {
-                if (diffY > 0) {
-                    triggerKey("ArrowDown");
-                } else {
-                    triggerKey("ArrowUp");
-                }
-            }
-        }
-    }
-}
 
 const triggerKey = (key) => {
     const event = new KeyboardEvent("keydown", { key });
     document.dispatchEvent(event);
 }
 
-board.addEventListener("touchstart", (e) => {
+document.addEventListener("touchstart", (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY
 });
 
-board.addEventListener("touchmove", (e) => {
+document.addEventListener("touchmove", (e) => {
     touchEndX = e.touches[0].clientX;
     touchEndY = e.touches[0].clientY
 });
 
-board.addEventListener("touchend", () => {
-    handleSwipe();
-})
+
+function restartGame() {
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("hscore", highScore);
+        document.getElementById("highscore").innerText = highScore;
+        console.log("Highscore updated:", highScore);
+    }
+
+    score = 0;
+    document.getElementById("score").innerText = score;
+    console.log(localStorage.getItem("hscore"));
+
+    resetBoard();
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
 ///////////////////////////////////////////////////////////////////////////////////////////// Other way to make slides
