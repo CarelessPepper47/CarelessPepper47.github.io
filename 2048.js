@@ -319,17 +319,17 @@ const triggerKey = (key) => {
     document.dispatchEvent(event);
 }
 
-document.addEventListener("touchstart", (e) => {
+board.addEventListener("touchstart", (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY
 });
 
-document.addEventListener("touchmove", (e) => {
+board.addEventListener("touchmove", (e) => {
     touchEndX = e.touches[0].clientX;
     touchEndY = e.touches[0].clientY
 });
 
-document.addEventListener("touchend", () => {
+board.addEventListener("touchend", () => {
     handleSwipe();
 })
 
